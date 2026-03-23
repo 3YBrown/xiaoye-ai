@@ -1,0 +1,30 @@
+-- 视频生成任务表
+-- 设计为通用结构，支持多个视频生成服务商（火山引擎、可灵等）
+CREATE TABLE IF NOT EXISTS video_tasks (
+    id              BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT COMMENT '自增ID',
+    user_id         BIGINT UNSIGNED NOT NULL COMMENT '用户ID',
+    task_id         VARCHAR(100) NOT NULL COMMENT '服务商返回的任务ID',
+    provider        VARCHAR(50) NOT NULL DEFAULT 'volcengine' COMMENT '服务商: volcengine, kling, runway等',
+    model           VARCHAR(100) NOT NULL COMMENT '模型ID，如 doubao-seedance-1-5-pro-251215',
+    prompt          TEXT COMMENT '提示词',
+    mode            VARCHAR(30) NOT NULL DEFAULT 'text-to-video' COMMENT '生成模式: text-to-video, first-frame, first-last-frame',
+    resolution      VARCHAR(10) DEFAULT '720p' COMMENT '分辨率: 480p, 720p, 1080p',
+    ratio           VARCHAR(10) DEFAULT '16:9' COMMENT '宽高比',
+    duration        INT DEFAULT 5 COMMENT '视频时长(秒)',
+    generate_audio  BOOLEAN DEFAULT true COMMENT '是否生成配音（部分模型支持）',
+    first_frame_url VARCHAR(500) COMMENT '首帧图片OSS地址',
+    last_frame_url  VARCHAR(500) COMMENT '尾帧图片OSS地址',
+    video_url       VARCHAR(500) COMMENT '生成的视频OSS地址',
+    video_cover_url VARCHAR(500) COMMENT '视频封面图地址',
+    status          VARCHAR(20) DEFAULT 'pending' COMMENT '状态: pending, queued, running, succeeded, failed, expired',
+    credits_spent   INT DEFAULT 0 COMMENT '消耗钻石数',
+    error_message   TEXT COMMENT '错误信息',
+    provider_response JSON COMMENT '服务商原始响应（通用字段）',
+    created_at      DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    updated_at      DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    INDEX idx_user_id (user_id),
+    INDEX idx_status (status),
+    INDEX idx_provider_task (provider, task_id),
+    INDEX idx_created_at (created_at),
+    INDEX idx_model (model)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='视频生成任务表';

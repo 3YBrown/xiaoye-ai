@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'Manrope', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  color: rgba(0, 0, 0, 0.88);
+  background: #f3f5f9;
+}
+
+code {
+  font-family: 'IBM Plex Mono', monospace;
+}

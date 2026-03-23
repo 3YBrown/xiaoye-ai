@@ -1,0 +1,57 @@
+# Local agent / IDE
+.ai/
+.claude/
+.iflycode/
+.idea/
+.vscode/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs / temp
+*.log
+*.tmp
+*.temp
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+backend/.env
+frontend/.env
+frontend/.env.*
+
+# Node / frontend artifacts
+node_modules/
+frontend/node_modules/
+frontend/.vite/
+frontend/dist/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Root is not a Node project
+/package-lock.json
+
+# Go build artifacts
+*.exe
+*.out
+*.test
+backend/bin/
+backend/coverage*.out
+
+# Packaging artifacts
+dist/
+*.tar.gz
+*.zip
+
+# Mini program private config
+miniprogram/project.private.config.json
+
+# Personal assets
+frontend/public/images/qrcode.jpg
+
+# Sample data with external resource dependencies
+backend/cmd/import_inspiration_full_json/prompts_full.json
